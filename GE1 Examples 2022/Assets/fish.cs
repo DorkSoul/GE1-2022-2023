@@ -12,6 +12,7 @@ public class fish : MonoBehaviour
     public float tailAmplitude = 60;
 
     public float theta = 0;
+    private float z;
 
     // Start is called before the first frame update
     void Start()
@@ -22,25 +23,15 @@ public class fish : MonoBehaviour
         fish.transform.position = new Vector3(0, 0, 0);
         fish.transform.localScale += new Vector3(1.0f, -0.0f, -0.0f);;
         fish.GetComponent<Renderer>().material.color = Color.HSVToRGB(0.9f,1.0f,1.0f);
-        fish.transform.parent = this.transform;
 
-        GameObject head = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        head.transform.position = new Vector3(2.0f, 0, 0);
-        head.transform.localScale += new Vector3(1.0f, -0.0f, -0.0f);;
-        head.GetComponent<Renderer>().material.color = Color.HSVToRGB(0.9f,1.0f,1.0f);
-        head.transform.parent = this.transform;
-
-        GameObject tail = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        tail.transform.position = new Vector3(-2.0f, 0, 0);
-        tail.transform.localScale += new Vector3(1.0f, -0.0f, -0.0f);;
-        tail.GetComponent<Renderer>().material.color = Color.HSVToRGB(0.9f,1.0f,1.0f);
-        tail.transform.parent = this.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Your code goes here!
-
+        z += Time.deltaTime * 75.0f;
+        head.transform.localRotation = Quaternion.Euler(0, z, 0);
+        //head.transform.rotate(0, 30.0f, 0);
+        //head.transform.Rotate(0, 30.0f, 0, Space.Self);
     }
 }
