@@ -8,7 +8,7 @@ public class head : MonoBehaviour
     void Start()
     {
         GameObject head = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        head.transform.position = new Vector3(2-.0f, 0, 0);
+        head.transform.position = new Vector3(-2.0f, 0, 0);
         head.transform.localScale += new Vector3(1.0f, -0.0f, -0.0f);;
         head.GetComponent<Renderer>().material.color = Color.HSVToRGB(0.9f,1.0f,1.0f); 
         head.transform.parent = this.transform;   

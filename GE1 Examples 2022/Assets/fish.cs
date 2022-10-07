@@ -12,12 +12,18 @@ public class fish : MonoBehaviour
     public float tailAmplitude = 60;
 
     public float theta = 0;
-    private float z;
+    private float speed;
+    private float ampHead;
+    private float ampTail;
+    private float currentRotation;
+    private bool direction;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         theta = 0;
+        direction = true;
             
         GameObject fish = GameObject.CreatePrimitive(PrimitiveType.Cube);
         fish.transform.position = new Vector3(0, 0, 0);
@@ -29,10 +35,31 @@ public class fish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        z += Time.deltaTime * 75.0f;
-        head.transform.localRotation = Quaternion.Euler(0, 0, z);
-        tail.transform.localRotation = Quaternion.Euler(0, 0, -z);
-        //head.transform.rotate(0, 30.0f, 0);
-        //head.transform.Rotate(0, 30.0f, 0, Space.Self);
+        currentRotation = head.transform.rotation.z;
+        if (head.transform.rotation.eulerAngles.z <= headAmplitude && direction == true){
+            speed += Time.deltaTime * 20.0f;
+            Debug.Log("Hello: " + head.transform.rotation.eulerAngles.z);
+            //Debug.Log("error: " + z);
+            head.transform.localRotation = Quaternion.Euler(0, 0, speed);
+            if (head.transform.rotation.eulerAngles.z >= headAmplitude){
+                direction = false;
+                }
+        }
+        else{
+            Debug.Log("Hello: " + head.transform.rotation.eulerAngles.z);
+            speed -= Time.deltaTime * 20.0f;
+            //Debug.Log("error: " + z);
+            head.transform.localRotation = Quaternion.Euler(0, 0, speed);
+            if (head.transform.rotation.eulerAngles.z <= (360 - headAmplitude)){
+                direction = true;
+                }
+        }
+
+
+
+        //head.transform.localRotation = Quaternion.AngleAxis(30, Vector3.back);
+
+        
+        //tail.transform.localRotation = Quaternion.Euler(0, 0, -z);
     }
 }
