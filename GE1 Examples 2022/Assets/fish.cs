@@ -30,7 +30,8 @@ public class fish : MonoBehaviour
     void Update()
     {
         z += Time.deltaTime * 75.0f;
-        head.transform.localRotation = Quaternion.Euler(0, z, 0);
+        head.transform.localRotation = Quaternion.Euler(0, 0, z);
+        tail.transform.localRotation = Quaternion.Euler(0, 0, -z);
         //head.transform.rotate(0, 30.0f, 0);
         //head.transform.Rotate(0, 30.0f, 0, Space.Self);
     }
