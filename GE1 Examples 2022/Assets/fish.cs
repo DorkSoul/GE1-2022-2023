@@ -35,31 +35,13 @@ public class fish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentRotation = head.transform.rotation.z;
-        if (head.transform.rotation.eulerAngles.z <= headAmplitude && direction == true){
-            speed += Time.deltaTime * 20.0f;
-            Debug.Log("Hello: " + head.transform.rotation.eulerAngles.z);
-            //Debug.Log("error: " + z);
-            head.transform.localRotation = Quaternion.Euler(0, 0, speed);
-            if (head.transform.rotation.eulerAngles.z >= headAmplitude){
-                direction = false;
-                }
-        }
-        else{
-            Debug.Log("Hello: " + head.transform.rotation.eulerAngles.z);
-            speed -= Time.deltaTime * 20.0f;
-            //Debug.Log("error: " + z);
-            head.transform.localRotation = Quaternion.Euler(0, 0, speed);
-            if (head.transform.rotation.eulerAngles.z <= (360 - headAmplitude)){
-                direction = true;
-                }
-        }
+        float headang = 0;
+        float tailang = 0;
+        theta+= Time.deltaTime * frequency;
+        headang= Mathf.Sin(theta) * headAmplitude;
+        tailang= Mathf.Sin(theta) * tailAmplitude;
+        head.transform.localRotation = Quaternion.AngleAxis(headang,Vector3.forward ) ;
 
-
-
-        //head.transform.localRotation = Quaternion.AngleAxis(30, Vector3.back);
-
-        
-        //tail.transform.localRotation = Quaternion.Euler(0, 0, -z);
+        tail.transform.localRotation = Quaternion.AngleAxis(tailang,Vector3.forward ); 
     }
 }
