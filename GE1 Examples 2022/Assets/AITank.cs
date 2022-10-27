@@ -66,27 +66,7 @@ public class AITank : MonoBehaviour {
         transform.Translate(toNext * speed * Time.deltaTime, Space.World);
 
 
-        Vector3 toPlayer = player.position - transform.position;
-        if (Vector3.Dot(transform.forward, toPlayer) < 0)
-        {
-            GameManager.Log("Player is behind");
-        }
-        else
-        {
-            GameManager.Log("Player is in front");
-        }
-        float angle = Mathf.Acos(Vector3.Dot(transform.forward, toPlayer) / toPlayer.magnitude) * Mathf.Rad2Deg;
-
-        GameManager.Log("Angle to player 1: " + angle);
-
-        if (angle < 45)
-        {
-            GameManager.Log("Player lost");
-        }
-        else
-        {
-            GameManager.Log("Player in range");
-        }
+        
     }
         // Task 4
         // Put code here to check if the player is in front of or behine the tank
