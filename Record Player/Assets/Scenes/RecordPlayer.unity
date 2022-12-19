@@ -6388,8 +6388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932cce7ea3ccb98428d68f634842622a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loops: 10
-  prefab: {fileID: 4676604676044906817, guid: f7de44963a741f741bed6a8bc34fb0d1, type: 3}
+  loops: 1
+  RecordPrefab: {fileID: 4676604676044906817, guid: f7de44963a741f741bed6a8bc34fb0d1, type: 3}
 --- !u!4 &812388512
 Transform:
   m_ObjectHideFlags: 0
