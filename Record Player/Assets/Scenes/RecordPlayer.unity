@@ -7308,6 +7308,7 @@ GameObject:
   - component: {fileID: 2103697968}
   - component: {fileID: 2103697971}
   - component: {fileID: 2103697972}
+  - component: {fileID: 2103697973}
   m_Layer: 0
   m_Name: Beam
   m_TagString: Untagged
@@ -7410,3 +7411,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!81 &2103697973
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103697967}
+  m_Enabled: 1

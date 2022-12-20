@@ -7,22 +7,39 @@ public class StopRotate : MonoBehaviour
     public float rotationSpeed = 90.0f; // degrees per second
     public float attractionStrength = 15.0f; // strength of the attraction force
     public Material material;
-    float currentHue = 0.0f;
-    float minPitch = 0.5f;
-    float maxPitch = 20.0f;
+    public GameObject childParticleSystem;
+    private float timer = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHue = 0.0f;
-        minPitch = 0.5f;
-        maxPitch = 20.0f;
+        // Set the child GameObject
+        childParticleSystem = transform.GetChild(0).gameObject;
+
+        // Use the Color.HSVToRGB method to convert the hue, saturation, and value to an RGB color
+        Color color = Color.HSVToRGB(0.5f, 1.0f, 1.0f);
+
+        // Use the Color constructor to create a new color with the RGB values from the HSV color and the alpha value
+        Color transparentColor = new Color(color.r, color.g, color.b, 0.5f);
+        Color opaqueColor = new Color(color.r, color.g, color.b, 1.0F);
+
+        // Apply the transparent color to the object's material
+        material.color = transparentColor;
+
+        // Get a reference to the ParticleSystem component of the child GameObject
+        ParticleSystem particleSystem = childParticleSystem.GetComponent<ParticleSystem>();
+
+        // Get the MainModule of the particle system
+        ParticleSystem.MainModule mainModule = particleSystem.main;
+
+        // Set the start color of the particle system to red
+        mainModule.startColor = opaqueColor;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -66,23 +83,59 @@ public class StopRotate : MonoBehaviour
             Quaternion targetRotation = Quaternion.Euler(0, rb.transform.rotation.eulerAngles.y, 0);
             rb.transform.rotation = Quaternion.RotateTowards(rb.transform.rotation, targetRotation, rotationDamping * Time.deltaTime);
 
-            AudioSource otherAudioSource = other.GetComponent<AudioSource>();
-            if (otherAudioSource != null)
+            // Increment the timer by the time since the last frame
+            timer += Time.deltaTime;
+
+            // If the timer has reached 1 second (or greater)
+            if (timer >= 1.0f)
             {
-                // Calculate the target hue value based on the pitch of the current note
-                float pitch = otherAudioSource.pitch;
-                float minPitch = 0.5f; // adjust these values to set the pitch range
-                float maxPitch = 20.0f;
-                float targetHue = (pitch - minPitch) / (maxPitch - minPitch);
+                // Reset the timer
+                timer = 0.0f;
+                // Create an array to store the audio spectrum data
+                float[] spectrumData = new float[1024];
 
-                // Interpolate between the current hue value and the target hue value using the Lerp function
-                float lerpSpeed = 1.0f; // adjust this value to control the speed of the lerp
-                currentHue = Mathf.Lerp(currentHue, targetHue, lerpSpeed);
+                // Get the audio spectrum data from the AudioListener
+                AudioListener.GetSpectrumData(spectrumData, 0, FFTWindow.Rectangular);
 
-                // Update the material color using the current hue value
+                // Calculate the average value of the spectrum data
+                float averageValue = 0;
+                for (int i = 0; i < spectrumData.Length; i++)
+                {
+                    averageValue += spectrumData[i];
+                }
+                averageValue /= spectrumData.Length;
+
+                // Use the average value to interpolate between 0 and 360 for the hue value
+                float hue = Mathf.Lerp(0, 360, averageValue);
+
+                // Set the saturation and value to constants
                 float saturation = 1.0f;
                 float value = 1.0f;
-                material.color = Color.HSVToRGB(currentHue, saturation, value);
+
+                // Use the Color.HSVToRGB method to convert the hue, saturation, and value to an RGB color
+                Color color = Color.HSVToRGB(hue, saturation, value);
+
+                // Set the alpha value to a constant
+                float alpha = 0.5f;
+
+                // Use the Color constructor to create a new color with the RGB values from the HSV color and the alpha value
+                Color transparentColor = new Color(color.r, color.g, color.b, alpha);
+                Color opaqueColor = new Color(color.r, color.g, color.b, 1.0F);
+
+                // Apply the transparent color to the object's material
+                material.color = transparentColor;
+
+                // Set the child GameObject
+                childParticleSystem = transform.GetChild(0).gameObject;
+
+                // Get a reference to the ParticleSystem component of the child GameObject
+                ParticleSystem particleSystem = childParticleSystem.GetComponent<ParticleSystem>();
+
+                // Get the MainModule of the particle system
+                ParticleSystem.MainModule mainModule = particleSystem.main;
+
+                // Set the start color of the particle system to red
+                mainModule.startColor = opaqueColor;
             }
         }
     }
