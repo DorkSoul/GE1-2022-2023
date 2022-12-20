@@ -26,19 +26,9 @@ public class StopRotate : MonoBehaviour
 
         // Use the Color constructor to create a new color with the RGB values from the HSV color and the alpha value
         Color transparentColor = new Color(color.r, color.g, color.b, 0.5f);
-        Color opaqueColor = new Color(color.r, color.g, color.b, 1.0F);
-
+        
         // Apply the transparent color to the object's material
         material.color = transparentColor;
-
-        // Get a reference to the ParticleSystem component of the child GameObject
-        ParticleSystem particleSystem = childParticleSystem.GetComponent<ParticleSystem>();
-
-        // Get the MainModule of the particle system
-        ParticleSystem.MainModule mainModule = particleSystem.main;
-
-        // Set the start color of the particle system to red
-        mainModule.startColor = opaqueColor;
     }
 
     // Update is called once per frame
