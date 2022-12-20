@@ -26,7 +26,7 @@ public class StopRotate : MonoBehaviour
 
         // Use the Color constructor to create a new color with the RGB values from the HSV color and the alpha value
         Color transparentColor = new Color(color.r, color.g, color.b, 0.5f);
-        
+
         // Apply the transparent color to the object's material
         material.color = transparentColor;
     }
@@ -65,10 +65,10 @@ public class StopRotate : MonoBehaviour
                 rb.angularVelocity = new Vector3(0, 0, 0);
                 rb.useGravity = false;
 
-                // Apply a force to the object to attract it towards the center
-                Vector3 xForce = Vector3.Scale(direction.normalized, Vector3.right) * attractionStrength;
-                Vector3 yForce = Vector3.Scale(direction.normalized, Vector3.up) * attractionStrength;
-                Vector3 zForce = Vector3.Scale(direction.normalized, Vector3.forward) * attractionStrength;
+               float dampingFactor = 0.1f / distance;
+                Vector3 xForce = Vector3.Scale(direction.normalized, Vector3.right) * attractionStrength / dampingFactor;
+                Vector3 yForce = Vector3.Scale(direction.normalized, Vector3.up) * attractionStrength / dampingFactor;
+                Vector3 zForce = Vector3.Scale(direction.normalized, Vector3.forward) * attractionStrength / dampingFactor;
                 rb.AddForce(xForce);
                 rb.AddForce(yForce);
                 rb.AddForce(zForce);
