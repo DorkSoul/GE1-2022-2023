@@ -12,12 +12,11 @@ Video:
 
 # Description of the project
 The project will be the creation of as futuristic style record player. 
-The initial plans will be to have a desk with a small half sphere that will project a cone shaped beam upwards.
-The record will float in this light over the desk while rotating and swaying.
+There is a desk with a small sphere that will project a cylinder shaped beam upwards.
+The record will float in this light over the desk while rotating and pulled towards the center.
 Music will play while the record in in place.
-If that all works as a stretch goal it will be possible to use the oculus controls to pick up the records and swap them out.
-Each one having an assigned song or songs to play.
-Again time depending the light supporting the record may change colour along with the song.
+Oculus controls are used to pick up the records and swap them out each one having an assigned song or songs to play.
+The light supporting the record may change colour along with the song.
 
 # Instructions for use
 Pick up a reord and drop or throw it into the beam of light.
