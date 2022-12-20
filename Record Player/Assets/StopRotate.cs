@@ -102,29 +102,42 @@ public class StopRotate : MonoBehaviour
 
                 oldHue = hue;
 
+                float[] smoothedSpectrumData = new float[1024];
+
                 // Create an array to store the audio spectrum data
                 float[] spectrumData = new float[1024];
 
                 // Get the audio spectrum data from the AudioListener
                 AudioListener.GetSpectrumData(spectrumData, 0, FFTWindow.Rectangular);
 
-                // Calculate the average value of the spectrum data
-                float averageValue = 0;
                 for (int i = 0; i < spectrumData.Length; i++)
                 {
-                    averageValue += spectrumData[i];
+                    smoothedSpectrumData[i] = spectrumData[i];
                 }
-                averageValue /= spectrumData.Length;
+
+                for (int i = 1; i < smoothedSpectrumData.Length - 1; i++)
+                {
+                    smoothedSpectrumData[i] = (smoothedSpectrumData[i - 1] + smoothedSpectrumData[i] + smoothedSpectrumData[i + 1]) / 3;
+                }
+
+                // Calculate the average value of the spectrum data
+                float averageValue = 0;
+                for (int i = 0; i < smoothedSpectrumData.Length; i++)
+                {
+                    averageValue += smoothedSpectrumData[i];
+                }
+                averageValue /= smoothedSpectrumData.Length;
 
                 // Use the average value to interpolate between 0 and 360 for the hue value
-                hue = Mathf.Lerp(0, 360, averageValue);
+                hue = Mathf.Lerp(0, 1, (averageValue*100));
                 newHue = hue;
             }
 
             fps = 1 / Time.deltaTime;
             counter = counter+1;
 
-            newHue = Mathf.Lerp(oldHue, hue, counter/fps);
+            newHue = Mathf.Lerp(oldHue, hue, counter/fps);            
+
             Color color = Color.HSVToRGB(newHue, saturation, value);
 
             // Set the alpha value to a constant

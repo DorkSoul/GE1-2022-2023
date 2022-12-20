@@ -1660,7 +1660,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781444093}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 7.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -1735,7 +1735,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 7.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -3105,7 +3105,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -3639,7 +3639,7 @@ ParticleSystem:
     speedModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.7
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -7127,7 +7127,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1900725049}
   - component: {fileID: 1900725048}
-  - component: {fileID: 1900725047}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7135,14 +7134,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1900725047
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900725046}
-  m_Enabled: 1
 --- !u!20 &1900725048
 Camera:
   m_ObjectHideFlags: 0
@@ -7308,7 +7299,6 @@ GameObject:
   - component: {fileID: 2103697968}
   - component: {fileID: 2103697971}
   - component: {fileID: 2103697972}
-  - component: {fileID: 2103697973}
   m_Layer: 0
   m_Name: Beam
   m_TagString: Untagged
@@ -7397,6 +7387,7 @@ MonoBehaviour:
   rotationSpeed: 90
   attractionStrength: 15
   material: {fileID: 2100000, guid: 44a437ac6555e8c4abba09440154e759, type: 2}
+  childParticleSystem: {fileID: 0}
 --- !u!64 &2103697972
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7411,11 +7402,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!81 &2103697973
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103697967}
-  m_Enabled: 1
