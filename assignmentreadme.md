@@ -51,4 +51,4 @@ Also very happy with the vr interactions but these were mostly imported from uni
 
 # What I learned
 I learned a lot about the lerp function from trying to get the spectrum data right.
-I also learned a lot about the various function unity has built in such as all the particale effect options i had no idea about before.
+I also learned a lot about the various function unity has built in such as all the particle effect options i had no idea about before.
