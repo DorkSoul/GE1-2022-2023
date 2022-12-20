@@ -9,6 +9,11 @@ public class StopRotate : MonoBehaviour
     public Material material;
     public GameObject childParticleSystem;
     private float timer = 0.0f;
+    private float counter = 0;
+    private float hue = 0.0f;
+    private float oldHue = 0.0f;
+    private float newHue = 0.0f;
+    private float fps = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +59,8 @@ public class StopRotate : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         float rotationDamping = 20.0f;
+        float saturation = 1.0f;
+        float value = 1.0f;
 
         // Check if the other object has a Rigidbody component
         Rigidbody rb = other.GetComponent<Rigidbody>();
@@ -89,8 +96,12 @@ public class StopRotate : MonoBehaviour
             // If the timer has reached 1 second (or greater)
             if (timer >= 1.0f)
             {
+                counter = 0;
                 // Reset the timer
                 timer = 0.0f;
+
+                oldHue = hue;
+
                 // Create an array to store the audio spectrum data
                 float[] spectrumData = new float[1024];
 
@@ -106,37 +117,24 @@ public class StopRotate : MonoBehaviour
                 averageValue /= spectrumData.Length;
 
                 // Use the average value to interpolate between 0 and 360 for the hue value
-                float hue = Mathf.Lerp(0, 360, averageValue);
-
-                // Set the saturation and value to constants
-                float saturation = 1.0f;
-                float value = 1.0f;
-
-                // Use the Color.HSVToRGB method to convert the hue, saturation, and value to an RGB color
-                Color color = Color.HSVToRGB(hue, saturation, value);
-
-                // Set the alpha value to a constant
-                float alpha = 0.5f;
-
-                // Use the Color constructor to create a new color with the RGB values from the HSV color and the alpha value
-                Color transparentColor = new Color(color.r, color.g, color.b, alpha);
-                Color opaqueColor = new Color(color.r, color.g, color.b, 1.0F);
-
-                // Apply the transparent color to the object's material
-                material.color = transparentColor;
-
-                // Set the child GameObject
-                childParticleSystem = transform.GetChild(0).gameObject;
-
-                // Get a reference to the ParticleSystem component of the child GameObject
-                ParticleSystem particleSystem = childParticleSystem.GetComponent<ParticleSystem>();
-
-                // Get the MainModule of the particle system
-                ParticleSystem.MainModule mainModule = particleSystem.main;
-
-                // Set the start color of the particle system to red
-                mainModule.startColor = opaqueColor;
+                hue = Mathf.Lerp(0, 360, averageValue);
+                newHue = hue;
             }
+
+            fps = 1 / Time.deltaTime;
+            counter = counter+1;
+
+            newHue = Mathf.Lerp(oldHue, hue, counter/fps);
+            Color color = Color.HSVToRGB(newHue, saturation, value);
+
+            // Set the alpha value to a constant
+            float alpha = 0.5f;
+
+            // Use the Color constructor to create a new color with the RGB values from the HSV color and the alpha value
+            Color transparentColor = new Color(color.r, color.g, color.b, alpha);
+
+            // Apply the transparent color to the object's material
+            material.color = transparentColor;                
         }
     }
 
