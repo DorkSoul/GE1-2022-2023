@@ -8,7 +8,7 @@ Class Group: dt228
 
 Video: 
 
-[![YouTube](https://img.youtube.com/vi/gigTBqkqTlE/0.jpg](https://youtu.be/gigTBqkqTlE)
+[![YouTube](https://img.youtube.com/vi/gigTBqkqTlE/0.jpg)](https://youtu.be/gigTBqkqTlE)
 
 # Description of the project
 The project will be the creation of as futuristic style record player. 
