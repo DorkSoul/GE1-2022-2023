@@ -6,17 +6,32 @@ public class StopRotate : MonoBehaviour
 {
     public float rotationSpeed = 90.0f; // degrees per second
     public float attractionStrength = 15.0f; // strength of the attraction force
+    public Material material;
+    float currentHue = 0.0f;
+    float minPitch = 0.5f;
+    float maxPitch = 20.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentHue = 0.0f;
+        minPitch = 0.5f;
+        maxPitch = 20.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        AudioSource otherAudioSource = other.GetComponent<AudioSource>();
+        if (otherAudioSource != null)
+        {
+            otherAudioSource.Play();
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -50,15 +65,25 @@ public class StopRotate : MonoBehaviour
             // Tend the rotation towards 0 on the x and z axis
             Quaternion targetRotation = Quaternion.Euler(0, rb.transform.rotation.eulerAngles.y, 0);
             rb.transform.rotation = Quaternion.RotateTowards(rb.transform.rotation, targetRotation, rotationDamping * Time.deltaTime);
-        }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        AudioSource otherAudioSource = other.GetComponent<AudioSource>();
-        if (otherAudioSource != null)
-        {
-            otherAudioSource.Play();
+            AudioSource otherAudioSource = other.GetComponent<AudioSource>();
+            if (otherAudioSource != null)
+            {
+                // Calculate the target hue value based on the pitch of the current note
+                float pitch = otherAudioSource.pitch;
+                float minPitch = 0.5f; // adjust these values to set the pitch range
+                float maxPitch = 20.0f;
+                float targetHue = (pitch - minPitch) / (maxPitch - minPitch);
+
+                // Interpolate between the current hue value and the target hue value using the Lerp function
+                float lerpSpeed = 1.0f; // adjust this value to control the speed of the lerp
+                currentHue = Mathf.Lerp(currentHue, targetHue, lerpSpeed);
+
+                // Update the material color using the current hue value
+                float saturation = 1.0f;
+                float value = 1.0f;
+                material.color = Color.HSVToRGB(currentHue, saturation, value);
+            }
         }
     }
 

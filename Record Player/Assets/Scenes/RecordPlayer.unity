@@ -7395,6 +7395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 90
   attractionStrength: 15
+  material: {fileID: 2100000, guid: 44a437ac6555e8c4abba09440154e759, type: 2}
 --- !u!64 &2103697972
 MeshCollider:
   m_ObjectHideFlags: 0
