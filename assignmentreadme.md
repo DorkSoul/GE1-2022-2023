@@ -41,7 +41,7 @@ The color will lerp between each color and the next over each second moving clos
 |-----------|-----------|
 | StopRotate.cs | Self made |
 | generator.cs | Modified from https://github.com/DorkSoul/GE1-2021-2022/blob/master/GE1%20Examples%202021/Assets/Generator.cs |
-| Music | From various artists|
+| Music | Tape Five, Serebro, Lindsey StirlingKeiichi Okabe, Caravan Palace, Bing Crosby, Annella, Bayonetta ost, Endwalker ost|
 | Skybox | From https://assetstore.unity.com/packages/2d/textures-materials/sky/allsky-free-10-sky-skybox-set-146014 |
 
 # References
