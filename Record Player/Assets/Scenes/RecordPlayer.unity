@@ -7287,7 +7287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 90
   attractionStrength: 15
-  maxAttractionDistance: 10
+  audioSource: {fileID: 0}
 --- !u!64 &2103697972
 MeshCollider:
   m_ObjectHideFlags: 0

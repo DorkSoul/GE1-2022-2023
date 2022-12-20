@@ -53,8 +53,24 @@ public class StopRotate : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        AudioSource otherAudioSource = other.GetComponent<AudioSource>();
+        if (otherAudioSource != null)
+        {
+            otherAudioSource.Play();
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
+        // Check if the other object has an audioSource component
+        AudioSource otherAudioSource = other.GetComponent<AudioSource>();
+        if (otherAudioSource != null)
+        {
+            otherAudioSource.Stop();
+        }
+        
         // Check if the other object has a Rigidbody component
         Rigidbody rb = other.GetComponent<Rigidbody>();
         if (rb != null)
