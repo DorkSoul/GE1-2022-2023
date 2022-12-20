@@ -6388,8 +6388,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932cce7ea3ccb98428d68f634842622a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numrecs: 7
+  numrecs: 9
   RecordPrefab: {fileID: 4676604676044906817, guid: f7de44963a741f741bed6a8bc34fb0d1, type: 3}
+  audioClips:
+  - {fileID: 8300000, guid: 44e45e8a3eed00642834e90ad34978a6, type: 3}
+  - {fileID: 8300000, guid: 8d2c25fd94aa1254c98d9ddc18ba788d, type: 3}
+  - {fileID: 8300000, guid: 7de835968722a144ba600f4809ca7c46, type: 3}
+  - {fileID: 8300000, guid: 1534abc37438b11498099f2f4169e55e, type: 3}
+  - {fileID: 8300000, guid: cab1e88c5db69ea4685d5cb5a6c3673d, type: 3}
+  - {fileID: 8300000, guid: 6d94384d80034fc4fb262c0f16ebb27d, type: 3}
+  - {fileID: 8300000, guid: 5607509a08419c3499d7a6cb01dd1e84, type: 3}
+  - {fileID: 8300000, guid: a8e8d6cfd09265b41837d6368d09961e, type: 3}
+  - {fileID: 8300000, guid: c091a1adfef5c0f4ca62450325aee194, type: 3}
 --- !u!4 &812388512
 Transform:
   m_ObjectHideFlags: 0
@@ -7287,7 +7297,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 90
   attractionStrength: 15
-  audioSource: {fileID: 0}
 --- !u!64 &2103697972
 MeshCollider:
   m_ObjectHideFlags: 0

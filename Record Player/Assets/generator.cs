@@ -6,6 +6,7 @@ public class generator : MonoBehaviour
 {
     public int numrecs = 7;
     public GameObject RecordPrefab;
+    public AudioClip[] audioClips;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,10 @@ public class generator : MonoBehaviour
             label.GetComponent<Renderer>().material.color =
                 Color.HSVToRGB(j / (float) numrecs, 1, 1);
             record.transform.parent = this.transform;
+
+            record.AddComponent<AudioSource>();
+            AudioSource audioSource = record.GetComponent<AudioSource>();
+            audioSource.clip = audioClips[j];;
         }
     }
 
